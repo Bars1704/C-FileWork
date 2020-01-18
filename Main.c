@@ -63,7 +63,7 @@ int main()
     City *CityList = calloc(1, sizeof(struct City)), TempBook;
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     FILE *f;
-    char select, *Name, *Path, **Point;
+    char select, *Name, *Path; //, **Point
     char *array[] = {"Create file", "Read file", "Write in the file", "Delete line", "Delete file", "Edit line", "Sort file", "Insert in sortet file", "Exit"};
     List dirs, templist, menulist;
     menulist.stringlist = array;
@@ -247,6 +247,34 @@ int main()
         case 8:
             SetConsoleTextAttribute(handle, FOREGROUND_RED);
             printf("Closing...");
+            free(Path);
+            free(Name);
+            free(CityList);
+            // dirs, templist, menulist
+            if (dirs.size != 0)
+            {
+                for (int i = 0; i < dirs.size; i++)
+                {
+                    free(dirs.stringlist[i]);
+                }
+                free(dirs.stringlist);
+            }
+            if (templist.size != 0)
+            {
+                for (int i = 0; i < templist.size; i++)
+                {
+                    free(templist.stringlist[i]);
+                }
+                free(templist.stringlist);
+            }
+            if (menulist.size != 0)
+            {
+                for (int i = 0; i < menulist.size; i++)
+                {
+                    free(menulist.stringlist[i]);
+                }
+                free(menulist.stringlist);
+            }
             return 0;
             break;
 
